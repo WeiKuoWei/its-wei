@@ -16,6 +16,9 @@ CLAUDE.md
 .DS_Store
 .claude
 
+# Environment variables
+.env
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -57,19 +57,19 @@ const CertificatesCarousel = () => {
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, 4000);
+    }, 6000);
 
     return () => clearInterval(interval);
   }, [autoScroll, maxIndex]);
 
   const handlePrevious = () => {
     setAutoScroll(false);
-    setCurrentIndex((prev) => Math.max(0, prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
   };
 
   const handleNext = () => {
     setAutoScroll(false);
-    setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
   };
 
   const visibleCertificates = certificates.slice(currentIndex, currentIndex + itemsPerView);
@@ -97,7 +97,6 @@ const CertificatesCarousel = () => {
               variant="outline"
               size="icon"
               onClick={handlePrevious}
-              disabled={currentIndex === 0}
               className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white border-2 border-primary/30 hover:bg-primary hover:border-primary shadow-lg transition-all"
             >
               <ChevronLeft className="w-5 h-5 text-primary group-hover:text-white transition-colors" />
@@ -108,7 +107,6 @@ const CertificatesCarousel = () => {
               variant="outline"
               size="icon"
               onClick={handleNext}
-              disabled={currentIndex >= maxIndex}
               className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white border-2 border-primary/30 hover:bg-primary hover:border-primary shadow-lg transition-all"
             >
               <ChevronRight className="w-5 h-5 text-primary group-hover:text-white transition-colors" />

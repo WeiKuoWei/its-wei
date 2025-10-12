@@ -3,12 +3,12 @@ import { createPortal } from "react-dom";
 import { X, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-interface ResumeModalProps {
+interface PaperModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
+const PaperModal = ({ isOpen, onClose }: PaperModalProps) => {
   // Handle ESC key to close modal
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -46,9 +46,9 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
       >
         {/* PDF Viewer */}
         <iframe
-          src="certificates/weikuo_resume.pdf"
+          src="certificates/neurtralizing_the_narrative.pdf"
           className="w-full h-full border-0"
-          title="Resume PDF"
+          title="Research Paper PDF"
         />
       </div>
     </div>,
@@ -56,4 +56,4 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
   );
 };
 
-export default ResumeModal;
+export default PaperModal;

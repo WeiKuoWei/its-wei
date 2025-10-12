@@ -13,6 +13,7 @@ const featuredProjects = [
     tech: ["Python", "FastAPI", "React", "ChromaDB", "Azure OpenAI", "Tailwind CSS"],
     category: "ML/AI",
     featured: true,
+    link: "https://github.com/WeiKuoWei/linkedin_connector",
   },
   {
     title: "Scalable AI Multi-Expert System",
@@ -20,6 +21,7 @@ const featuredProjects = [
     tech: ["Python", "Langchain", "ChromaDB", "FastAPI", "React", "LLMs"],
     category: "ML/AI",
     featured: true,
+    link: "https://github.com/WeiKuoWei/semantic_router",
   },
 ];
 
@@ -29,19 +31,22 @@ const otherProjects = [
     description: "Full-stack application with RAG techniques managing 10,000+ messages and 94 documents, deployed on Kubernetes",
     tech: ["Python", "Langchain", "ChromaDB", "FastAPI"],
     category: "ML/AI",
+    link: "https://github.com/WeiKuoWei/slack_chatbot",
   },
   {
     title: "Online Telehealth Portal - Smartel",
     description: "Scalable platform handling 1000+ concurrent users with AWS infrastructure",
     tech: ["AWS", "FastAPI", "React", "PostgreSQL"],
     category: "Web",
+    link: "https://github.com/WeiKuoWei/ai-powered-health-platform",
   },
   {
-    title: "Hotel Demand Prediction",
-    description: "ML models achieving 85.10% accuracy in predicting booking cancellations",
-    tech: ["Python", "PyTorch", "Pandas", "NumPy"],
-    category: "ML/AI",
-  },
+    title: "News Scraper",
+    description: "Tool for scraping 10+ years of historical news articles from CNN Fox News, and other major publishers via Wayback Machine",
+    tech: ["Python", "BeautifulSoup", "Pandas", "NewsPlease"],
+    category: "Data Engineering",
+    link: "https://github.com/WeiKuoWei/scrape_news_articles",
+  }
 ];
 
 const ProjectsShowcase = () => {
@@ -82,12 +87,11 @@ const ProjectsShowcase = () => {
                     <div className="flex items-start justify-between mb-4">
                       <Badge className="bg-primary/20 text-primary">Featured</Badge>
                       <div className="flex gap-2">
-                        <Button size="icon" variant="ghost" className="text-slate-700 hover:text-primary hover:bg-primary/10">
-                          <ExternalLink className="w-4 h-4" />
-                        </Button>
-                        <Button size="icon" variant="ghost" className="text-slate-700 hover:text-primary hover:bg-primary/10">
-                          <Github className="w-4 h-4" />
-                        </Button>
+                        <a href={project.link} target="_blank" rel="noopener noreferrer">
+                          <Button size="icon" variant="ghost" className="text-slate-700 hover:text-primary hover:bg-primary/10">
+                            <Github className="w-4 h-4" />
+                          </Button>
+                        </a>
                       </div>
                     </div>
                     <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
@@ -130,6 +134,11 @@ const ProjectsShowcase = () => {
 
                   {/* Dark Overlay with Description and Tech Badges - Appears on Hover */}
                   <div className="absolute inset-0 bg-slate-900/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 gap-4">
+                    <a href={project.link} target="_blank" rel="noopener noreferrer">
+                      <Button size="icon" variant="ghost" className="text-slate-400 hover:text-primary hover:bg-primary/10">
+                        <Github className="w-4 h-4" />
+                      </Button>
+                    </a>
                     <p className="text-sm text-white/90 text-center leading-relaxed">
                       {project.description}
                     </p>

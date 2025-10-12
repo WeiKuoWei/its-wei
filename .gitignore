@@ -13,7 +13,6 @@ dist
 dist-ssr
 CLAUDE.md
 *.local
-.github
 .DS_Store
 
 # Editor directories and files

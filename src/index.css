@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 217 33% 15%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 217 33% 15%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 189 94% 43%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 230 48% 48%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 189 94% 43%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 20%;
+    --input: 217 33% 20%;
+    --ring: 189 94% 43%;
+
+    --radius: 0.75rem;
+    
+    /* Custom tokens for personal branding site */
+    --gradient-primary: linear-gradient(135deg, hsl(230 48% 48%) 0%, hsl(189 94% 43%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(222 47% 11%) 0%, hsl(230 48% 20%) 100%);
+    --glow: 0 0 20px hsl(189 94% 43% / 0.3);
+    --glow-strong: 0 0 40px hsl(189 94% 43% / 0.6);
+    
+    /* Light sections tokens */
+    --light-section-text: 222 47% 15%;
+    --light-section-muted: 220 15% 45%;
+    --light-card: 0 0% 100%;
+    --light-card-border: 220 13% 91%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .gradient-border {
+    position: relative;
+    background: hsl(var(--card));
+    border: 1px solid transparent;
+  }
+  
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: var(--gradient-primary);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  
+  .hover-glow {
+    transition: all 0.3s ease;
+  }
+  
+  .hover-glow:hover {
+    box-shadow: var(--glow);
+    transform: translateY(-2px);
+  }
+  
+  /* Light section styling */
+  .light-section {
+    @apply text-[hsl(var(--light-section-text))];
+  }
+  
+  .light-section .text-muted-foreground {
+    @apply text-[hsl(var(--light-section-muted))];
+  }
+  
+  .light-section .gradient-border {
+    background: hsl(var(--light-card));
+    border-color: hsl(var(--light-card-border));
+  }
+  
+  .light-section h1,
+  .light-section h2,
+  .light-section h3,
+  .light-section h4,
+  .light-section h5,
+  .light-section h6 {
+    @apply text-[hsl(var(--light-section-text))];
+  }
+}

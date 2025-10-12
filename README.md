@@ -27,10 +27,10 @@ This portfolio highlights my journey as an AI & Automation Engineer, Computer Sc
 
 ```bash
 # Clone the repository
-git clone https://github.com/[username]/my-branding-spot.git
+git clone https://github.com/[username]/its-wei.git
 
 # Navigate to the project directory
-cd my-branding-spot
+cd its-wei
 
 # Install dependencies
 npm install
@@ -93,7 +93,7 @@ src/
 
 ## Deployment
 
-This site is deployed on GitHub Pages at: `https://[username].github.io/my-branding-spot/`
+This site is deployed on GitHub Pages at: `https://[username].github.io/its-wei/`
 
 Deployment is automated via GitHub Actions. Every push to the `main` branch triggers a new build and deployment.
 

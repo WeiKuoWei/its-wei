@@ -48,12 +48,12 @@ const About = () => {
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
                     I graduated <span className="text-primary font-semibold">Magna Cum Laude</span> from{" "}
-                    <span className="text-primary font-semiboldm">NYU Abu Dhabi</span> with a B.S. in Computer Science
+                    <span className="text-primary font-semibold">NYU Abu Dhabi</span> with a B.S. in Computer Science
                     and a minor in Mathematics, achieving a GPA of{" "}
                     <span className="text-primary font-semibold">3.94/4.00</span>.
                   </p>
                   <p>
-                    During my internship at <span className="text-primary font-semiboldm">TSMC</span>, I developed
+                    During my internship at <span className="text-primary font-semibold">TSMC</span>, I developed
                     machine learning models that enhanced production forecast accuracy by 4%, impacting 10,000+
                     products. This work earned me the <span className="text-primary font-semibold">Gold Award</span> in
                     the regional intern competition.

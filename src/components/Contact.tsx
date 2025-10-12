@@ -7,6 +7,8 @@ import { Github, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
+import emailjs, { EmailJSResponseStatus } from "@emailjs/browser";
+import { emailConfig, isEmailConfigValid } from "@/lib/emailConfig";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -27,17 +29,44 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
+      // Validate form data with Zod
       const validated = contactSchema.parse(formData);
 
-      // Simulate form submission
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Check if EmailJS is configured
+      if (!isEmailConfigValid()) {
+        toast.error("Email service is not configured. Please contact the site administrator.");
+        console.error("EmailJS configuration is missing. Please set up environment variables.");
+        return;
+      }
+
+      // Send email using EmailJS
+      const templateParams = {
+        from_name: validated.name,
+        from_email: validated.email,
+        message: validated.message,
+        reply_to: validated.email,
+        to_name: "Wei Kuo",
+      };
+
+      await emailjs.send(
+        emailConfig.serviceId,
+        emailConfig.templateId,
+        templateParams,
+        {
+          publicKey: emailConfig.publicKey,
+        }
+      );
 
       toast.success("Message sent successfully! I'll get back to you soon.");
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       if (error instanceof z.ZodError) {
         toast.error(error.errors[0].message);
+      } else if (error instanceof EmailJSResponseStatus) {
+        console.error("EmailJS Error:", error);
+        toast.error(`Failed to send message: ${error.text || "Please try again."}`);
       } else {
+        console.error("Unexpected Error:", error);
         toast.error("Failed to send message. Please try again.");
       }
     } finally {

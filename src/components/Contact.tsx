@@ -3,12 +3,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Github, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
 import emailjs, { EmailJSResponseStatus } from "@emailjs/browser";
 import { emailConfig, isEmailConfigValid } from "@/lib/emailConfig";
+import { SOCIAL_LINKS } from "@/config/socialLinks";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -158,20 +159,22 @@ const Contact = () => {
               <CardContent className="pt-6">
                 <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
                 <div className="space-y-6">
-                  <div className="flex items-center gap-3 text-left">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <Mail className="w-6 h-6 text-primary" />
+                  {SOCIAL_LINKS.filter(link => link.id === "email").map((link) => (
+                    <div key={link.id} className="flex items-center gap-3 text-left">
+                      <div className="p-3 bg-primary/10 rounded-lg">
+                        <link.Icon className="w-6 h-6 text-primary" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">{link.label}</p>
+                        <a
+                          href={link.href}
+                          className="text-base font-medium text-[hsl(var(--light-section-text))] hover:text-primary transition-colors"
+                        >
+                          {link.username}
+                        </a>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Email</p>
-                      <a
-                        href="mailto:ck3294@nyu.edu"
-                        className="text-base font-medium text-[hsl(var(--light-section-text))] hover:text-primary transition-colors"
-                      >
-                        ck3294@nyu.edu
-                      </a>
-                    </div>
-                  </div>
+                  ))}
 
                   <div className="flex items-center gap-3 text-left">
                     <div className="p-3 bg-primary/10 rounded-lg">
@@ -198,56 +201,45 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 text-left">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <Github className="w-6 h-6 text-primary" />
+                  {SOCIAL_LINKS.filter(link => link.id === "github").map((link) => (
+                    <div key={link.id} className="flex items-center gap-3 text-left">
+                      <div className="p-3 bg-primary/10 rounded-lg">
+                        <link.Icon className="w-6 h-6 text-primary" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">{link.label}</p>
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-base font-medium text-[hsl(var(--light-section-text))] hover:text-primary transition-colors"
+                        >
+                          {link.username}
+                        </a>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">GitHub</p>
-                      <a
-                        href="https://github.com/WeiKuoWei"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-base font-medium text-[hsl(var(--light-section-text))] hover:text-primary transition-colors"
-                      >
-                        @WeiKuoWei
-                      </a>
-                    </div>
-                  </div>
+                  ))}
 
                   <div className="pt-6 border-t border-border">
                     <h4 className="text-sm font-semibold text-[hsl(var(--light-section-text))] mb-4">Social Links</h4>
                     <div className="flex gap-4">
-                      <Button
-                        size="icon"
-                        variant="outline"
-                        className="border-primary/50 hover:bg-primary/10 hover:scale-110 transition-transform"
-                        asChild
-                      >
-                        <a href="https://github.com/WeiKuoWei" target="_blank" rel="noopener noreferrer">
-                          <Github className="w-5 h-5" />
-                        </a>
-                      </Button>
-                      <Button
-                        size="icon"
-                        variant="outline"
-                        className="border-primary/50 hover:bg-primary/10 hover:scale-110 transition-transform"
-                        asChild
-                      >
-                        <a href="https://linkedin.com/in/chen-wei-kuo" target="_blank" rel="noopener noreferrer">
-                          <Linkedin className="w-5 h-5" />
-                        </a>
-                      </Button>
-                      <Button
-                        size="icon"
-                        variant="outline"
-                        className="border-primary/50 hover:bg-primary/10 hover:scale-110 transition-transform"
-                        asChild
-                      >
-                        <a href="mailto:ck3294@nyu.edu">
-                          <Mail className="w-5 h-5" />
-                        </a>
-                      </Button>
+                      {SOCIAL_LINKS.map((link) => (
+                        <Button
+                          key={link.id}
+                          size="icon"
+                          variant="outline"
+                          className="border-primary/50 hover:bg-primary/10 hover:scale-110 transition-transform"
+                          asChild
+                        >
+                          <a
+                            href={link.href}
+                            target={link.external ? "_blank" : undefined}
+                            rel={link.external ? "noopener noreferrer" : undefined}
+                          >
+                            <link.Icon className="w-5 h-5" />
+                          </a>
+                        </Button>
+                      ))}
                     </div>
                   </div>
                 </div>

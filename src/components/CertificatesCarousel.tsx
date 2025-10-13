@@ -1,78 +1,27 @@
-import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Award, ExternalLink, FileText, GraduationCap, Brain, Trophy } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink, FileText } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const certificates = [
-  {
-    title: "TSMC Regional Intern Competition Gold Award",
-    issuer: "Taiwan Semiconductor Manufacturing Company",
-    achievement: "Top 4 out of 250 regional interns - recognized for outstanding ML research",
-    date: "Summer 2023",
-    Icon: Trophy,
-    // verifyLink: "/certificates/founders-award.pdf",
-    description: "Gold Award for Machine Learning Innovation in Semiconductor Manufacturing",
-  },
-  {
-    title: "IBM Data Science Professional Certificate",
-    issuer: "IBM via Coursera",
-    achievement:
-      "Completed 9-course specialization covering data science methodology, Python, SQL, and machine learning",
-    date: "2023",
-    Icon: GraduationCap,
-    // certificateFile: "/certificates/ibm-data-science.pdf",
-    // verifyLink: "https://www.coursera.org/account/accomplishments/professional-cert/",
-    description: "Comprehensive training in data analysis, visualization, and ML algorithms",
-  },
-  {
-    title: "Deep Learning Specialization",
-    issuer: "DeepLearning.AI via Coursera",
-    achievement: "5-course specialization by Andrew Ng covering neural networks, CNNs, RNNs, and transformers",
-    date: "2023",
-    Icon: Brain,
-    // certificateFile: "/certificates/deep-learning.pdf",
-    // verifyLink: "https://www.coursera.org/account/accomplishments/specialization/",
-    description: "Advanced deep learning architectures and practical implementation",
-  },
-  {
-    title: "American Region Mathematics League International",
-    issuer: "ARML",
-    achievement: "3rd Place in International Mathematics Competition",
-    date: "2019",
-    Icon: Award,
-    description: "Top performance in prestigious high school mathematics competition",
-  },
-];
+import { certificates } from "@/data/certificates";
+import { useCarousel } from "@/hooks/useCarousel";
+import { CAROUSEL } from "@/config/constants";
 
 const CertificatesCarousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [autoScroll, setAutoScroll] = useState(true);
+  const {
+    currentIndex,
+    maxIndex,
+    autoScroll,
+    goToNext,
+    goToPrevious,
+    goToIndex,
+  } = useCarousel({
+    itemCount: certificates.length,
+    itemsPerView: CAROUSEL.ITEMS_PER_VIEW,
+    autoScrollInterval: CAROUSEL.AUTO_SCROLL_INTERVAL,
+    autoScrollEnabled: true,
+  });
 
-  const itemsPerView = 3;
-  const maxIndex = Math.max(0, certificates.length - itemsPerView);
-
-  useEffect(() => {
-    if (!autoScroll) return;
-
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, 6000);
-
-    return () => clearInterval(interval);
-  }, [autoScroll, maxIndex]);
-
-  const handlePrevious = () => {
-    setAutoScroll(false);
-    setCurrentIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
-  };
-
-  const handleNext = () => {
-    setAutoScroll(false);
-    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-  };
-
-  const visibleCertificates = certificates.slice(currentIndex, currentIndex + itemsPerView);
+  const visibleCertificates = certificates.slice(currentIndex, currentIndex + CAROUSEL.ITEMS_PER_VIEW);
 
   return (
     <section id="certificates" className="py-24 bg-white light-section">
@@ -96,7 +45,7 @@ const CertificatesCarousel = () => {
             <Button
               variant="outline"
               size="icon"
-              onClick={handlePrevious}
+              onClick={goToPrevious}
               className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white border-2 border-primary/30 hover:bg-primary hover:border-primary shadow-lg transition-all"
             >
               <ChevronLeft className="w-5 h-5 text-primary group-hover:text-white transition-colors" />
@@ -106,7 +55,7 @@ const CertificatesCarousel = () => {
             <Button
               variant="outline"
               size="icon"
-              onClick={handleNext}
+              onClick={goToNext}
               className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white border-2 border-primary/30 hover:bg-primary hover:border-primary shadow-lg transition-all"
             >
               <ChevronRight className="w-5 h-5 text-primary group-hover:text-white transition-colors" />
@@ -180,10 +129,7 @@ const CertificatesCarousel = () => {
               {Array.from({ length: maxIndex + 1 }).map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => {
-                    setAutoScroll(false);
-                    setCurrentIndex(index);
-                  }}
+                  onClick={() => goToIndex(index)}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     index === currentIndex ? "w-8 bg-primary" : "w-2 bg-muted"
                   }`}

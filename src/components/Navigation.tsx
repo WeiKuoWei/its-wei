@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Download } from "lucide-react";
 import ResumeModal from "./ResumeModal";
+import { NAV_ITEMS } from "@/config/navigation";
+import { NAVIGATION } from "@/config/constants";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -10,20 +12,11 @@ const Navigation = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > NAVIGATION.SCROLL_THRESHOLD);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const navItems = [
-    { label: "About", href: "#about" },
-    { label: "Skills", href: "#skills" },
-    { label: "Experience", href: "#experience" },
-    { label: "Projects", href: "#projects" },
-    { label: "Certificates", href: "#certificates" },
-    { label: "Contact", href: "#contact" },
-  ];
 
   return (
     <nav
@@ -40,7 +33,7 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
+            {NAV_ITEMS.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
@@ -73,7 +66,7 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 space-y-4 animate-fade-in">
-            {navItems.map((item) => (
+            {NAV_ITEMS.map((item) => (
               <a
                 key={item.href}
                 href={item.href}

@@ -1,20 +1,14 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { GraduationCap, Award, BookOpen, Briefcase, Code, Trophy } from "lucide-react";
+import { GraduationCap, Award, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { statsData, skillCategories } from "@/data/skills";
 
 const About = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
-
-  const statsData = [
-    { icon: GraduationCap, label: "GPA", value: "3.94", color: "text-primary" },
-    { icon: Briefcase, label: "Companies", value: "4", color: "text-secondary" },
-    { icon: Code, label: "Projects", value: "10+", color: "text-primary" },
-    { icon: Trophy, label: "TSMC Award", value: "Gold", color: "text-secondary" },
-  ];
 
   return (
     <section id="about" className="py-24 bg-white light-section">
@@ -140,66 +134,26 @@ const About = () => {
             </Card>
           </div>
 
-          {/* Skills Section moved to separate component */}
+          {/* Skills Section */}
           <div id="skills" className="space-y-8">
             <h3 className="text-2xl font-bold text-center">Technical Skills</h3>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div>
-                <h4 className="text-sm font-semibold text-primary mb-3">Core Languages</h4>
-                <div className="flex flex-wrap gap-2">
-                  {["Python", "C/C++", "JavaScript", "TypeScript"].map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 text-xs bg-slate-200 text-[hsl(var(--light-section-text))] rounded-full"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+              {skillCategories.map((category, index) => (
+                <div key={index}>
+                  <h4 className="text-sm font-semibold text-primary mb-3">{category.title}</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {category.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-3 py-1 text-xs bg-slate-200 text-[hsl(var(--light-section-text))] rounded-full"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-semibold text-primary mb-3">ML/AI Stack</h4>
-                <div className="flex flex-wrap gap-2">
-                  {["PyTorch", "TensorFlow", "LangChain", "RAG", "Claude"].map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 text-xs bg-slate-200 text-[hsl(var(--light-section-text))] rounded-full"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-semibold text-primary mb-3">Cloud & DevOps</h4>
-                <div className="flex flex-wrap gap-2">
-                  {["AWS", "GCP", "Docker", "Kubernetes", "Git"].map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 text-xs bg-slate-200 text-[hsl(var(--light-section-text))] rounded-full"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-semibold text-primary mb-3">Data Tools</h4>
-                <div className="flex flex-wrap gap-2">
-                  {["Pandas", "NumPy", "SQL", "MongoDB", "PowerBI"].map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 text-xs bg-slate-200 text-[hsl(var(--light-section-text))] rounded-full"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

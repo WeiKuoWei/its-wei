@@ -1,7 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, FileText, Briefcase, Download } from "lucide-react";
 import { TypeAnimation } from "react-type-animation";
 import ParticlesBackground from "./ParticlesBackground";
+import SocialLinks from "./SocialLinks";
 import avatar from "@/assets/avatar.jpg";
 
 const Hero = () => {
@@ -9,7 +8,7 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Dark Background */}
       <div className="absolute inset-0 bg-slate-950 z-0"></div>
-      
+
       {/* Particles */}
       <ParticlesBackground />
 
@@ -19,9 +18,9 @@ const Hero = () => {
           {/* Avatar */}
           <div className="animate-fade-in">
             <div className="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden ring-4 ring-primary/30 shadow-[0_0_40px_rgba(0,222,255,0.4)]">
-              <img 
-                src={avatar} 
-                alt="Wei Kuo" 
+              <img
+                src={avatar}
+                alt="Wei Kuo"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -53,29 +52,8 @@ const Hero = () => {
 
 
           {/* Social Links */}
-          <div className="flex gap-6 justify-center pt-8">
-            <a 
-              href="https://github.com/WeiKuoWei" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-125"
-            >
-              <Github size={28} />
-            </a>
-            <a 
-              href="https://linkedin.com/in/chen-wei-kuo" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-125"
-            >
-              <Linkedin size={28} />
-            </a>
-            <a 
-              href="mailto:ck3294@nyu.edu"
-              className="text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-125"
-            >
-              <Mail size={28} />
-            </a>
+          <div className="pt-8">
+            <SocialLinks variant="hero" />
           </div>
         </div>
       </div>

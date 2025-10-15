@@ -22,6 +22,7 @@ import {
   TrendingUp,
   Wrench,
   Lightbulb,
+  Heart,
 } from "lucide-react";
 
 export type CertificateCategory = 'degree' | 'award' | 'specialization' | 'course' | 'standalone';
@@ -69,16 +70,6 @@ export const certificates: Certificate[] = [
     date: "Summer 2024",
     Icon: Trophy,
     description: "Gold Award for Machine Learning Innovation in Semiconductor Manufacturing",
-    featured: false,
-    category: 'award',
-  },
-  {
-    title: "American Region Mathematics League International",
-    issuer: "ARML",
-    achievement: "3rd Place in International Mathematics Competition",
-    date: "2019",
-    Icon: Award,
-    description: "Top performance in prestigious high school mathematics competition",
     featured: false,
     category: 'award',
   },
@@ -245,6 +236,16 @@ export const certificates: Certificate[] = [
     ],
   },
   {
+    title: "American Region Mathematics League International",
+    issuer: "ARML",
+    achievement: "3rd Place in International Mathematics Competition",
+    date: "2019",
+    Icon: Award,
+    description: "Top performance in prestigious high school mathematics competition",
+    featured: false,
+    category: 'award',
+  },
+  {
     title: "CITI Program - Investigators Conducting Exempt Research",
     issuer: "CITI Program",
     achievement: "Basic Course Completion",
@@ -262,4 +263,14 @@ export const certificates: Certificate[] = [
     description: "Foundational supervised learning algorithms and techniques",
     category: 'standalone',
   },
+  {
+    title: "Adult-to-Adult Mental Health First Aid",
+    issuer: "The LightHouse Arabia",
+    achievement: "Mental Health First Aid Certification",
+    date: "February 2024",
+    Icon: Heart, // or HeartHandshake
+    description: "Evidence-based training to identify and respond to mental health crises with empathy",
+    featured: false,
+    category: 'award',
+  }
 ];

@@ -1,27 +1,33 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, ExternalLink, FileText } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { certificates } from "@/data/certificates";
 import { useCarousel } from "@/hooks/useCarousel";
 import { CAROUSEL } from "@/config/constants";
+import ExpandableCertificateCard from "./ExpandableCertificateCard";
 
 const CertificatesCarousel = () => {
+  // Sort certificates: featured first, then by date
+  const sortedCertificates = [...certificates].sort((a, b) => {
+    if (a.featured && !b.featured) return -1;
+    if (!a.featured && b.featured) return 1;
+    return 0;
+  });
+
   const {
     currentIndex,
-    maxIndex,
     autoScroll,
     goToNext,
     goToPrevious,
     goToIndex,
   } = useCarousel({
-    itemCount: certificates.length,
+    itemCount: sortedCertificates.length,
     itemsPerView: CAROUSEL.ITEMS_PER_VIEW,
     autoScrollInterval: CAROUSEL.AUTO_SCROLL_INTERVAL,
     autoScrollEnabled: true,
   });
 
-  const visibleCertificates = certificates.slice(currentIndex, currentIndex + CAROUSEL.ITEMS_PER_VIEW);
+  const visibleCertificates = sortedCertificates.slice(currentIndex, currentIndex + CAROUSEL.ITEMS_PER_VIEW);
 
   return (
     <section id="certificates" className="py-24 bg-white light-section">
@@ -72,61 +78,20 @@ const CertificatesCarousel = () => {
                   transition={{ duration: 0.5 }}
                   className="grid md:grid-cols-3 gap-6"
                 >
-                  {visibleCertificates.map((cert, index) => {
-                    const Icon = cert.Icon;
-                    return (
-                      <Card
-                        key={currentIndex + index}
-                        className="gradient-border hover-glow cursor-pointer group transform transition-all duration-300 hover:scale-[1.02]"
-                      >
-                        <CardContent className="pt-6 flex flex-col h-full">
-                          <div className="text-center space-y-3 flex-1">
-                            {/* Icon */}
-                            <div className="p-3 bg-primary/10 rounded-full inline-block mb-2 transform transition-transform duration-300 group-hover:scale-110">
-                              <Icon className="w-8 h-8 text-primary" />
-                            </div>
-
-                            {/* Content */}
-                            <div>
-                              <h3 className="font-bold text-base mb-2 group-hover:text-primary transition-colors min-h-[3rem]">
-                                {cert.title}
-                              </h3>
-                              <p className="text-sm text-primary font-semibold mb-1">{cert.issuer}</p>
-                              <p className="text-xs text-muted-foreground mb-2">{cert.achievement}</p>
-                              <p className="text-xs text-muted-foreground">{cert.date}</p>
-                            </div>
-                          </div>
-
-                          {/* Action Buttons */}
-                          <div className="flex gap-2 mt-4 pt-4 border-t border-border/50">
-                            {cert.certificateFile && (
-                              <Button asChild variant="outline" className="h-8 px-3 text-xs">
-                                <a href={cert.certificateFile} target="_blank" rel="noopener noreferrer">
-                                  <FileText className="w-3 h-3 mr-1" />
-                                  View
-                                </a>
-                              </Button>
-                            )}
-                            {cert.verifyLink && (
-                              <Button asChild variant="secondary" className="h-8 px-3 text-xs">
-                                <a href={cert.verifyLink} target="_blank" rel="noopener noreferrer">
-                                  <ExternalLink className="w-3 h-3 mr-1" />
-                                  Verify
-                                </a>
-                              </Button>
-                            )}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    );
-                  })}
+                  {visibleCertificates.map((cert, index) => (
+                    <ExpandableCertificateCard
+                      key={currentIndex + index}
+                      certificate={cert}
+                      index={currentIndex + index}
+                    />
+                  ))}
                 </motion.div>
               </AnimatePresence>
             </div>
 
             {/* Progress Indicators */}
             <div className="flex justify-center gap-2 mt-6">
-              {Array.from({ length: Math.ceil(certificates.length / CAROUSEL.ITEMS_PER_VIEW) }).map((_, index) => {
+              {Array.from({ length: Math.ceil(sortedCertificates.length / CAROUSEL.ITEMS_PER_VIEW) }).map((_, index) => {
                 const pageIndex = index * CAROUSEL.ITEMS_PER_VIEW;
                 return (
                   <button

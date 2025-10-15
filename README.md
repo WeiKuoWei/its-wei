@@ -66,17 +66,38 @@ src/
 │   ├── ui/             # shadcn/ui components (Radix primitives)
 │   ├── Hero.tsx        # Landing section
 │   ├── About.tsx       # About & skills section
-│   ├── ExperienceTimeline.tsx
-│   ├── Research.tsx
-│   ├── ProjectsShowcase.tsx
-│   └── ...
+│   ├── Navigation.tsx  # Navigation bar
+│   ├── Experience.tsx  # Experience section wrapper
+│   ├── ExperienceTimeline.tsx  # Timeline component
+│   ├── Research.tsx    # Research publications
+│   ├── Projects.tsx    # Projects section wrapper
+│   ├── ProjectsShowcase.tsx  # Project cards display
+│   ├── CertificatesCarousel.tsx  # Certificates slider
+│   ├── Contact.tsx     # Contact form
+│   ├── Footer.tsx      # Footer section
+│   ├── SocialLinks.tsx # Social media links
+│   ├── PaperModal.tsx  # Research paper viewer
+│   ├── PDFModal.tsx    # PDF document viewer
+│   ├── ResumeModal.tsx # Resume viewer
+│   └── ParticlesBackground.tsx  # Animated background
 ├── pages/              # Page components
 │   ├── Index.tsx       # Main single-page layout
 │   └── NotFound.tsx    # 404 page
+├── data/               # Centralized data
+│   ├── certificates.ts # Certificates data
+│   ├── experiences.ts  # Work experience data
+│   ├── projects.ts     # Projects data
+│   ├── research.ts     # Research publications data
+│   └── skills.ts       # Skills data
+├── config/             # Configuration files
+│   ├── navigation.ts   # Navigation configuration
+│   ├── socialLinks.ts  # Social media links config
+│   └── constants.ts    # App constants
 ├── hooks/              # Custom React hooks
 ├── lib/                # Utility functions
 ├── assets/             # Images and static assets
 ├── App.tsx             # Root app component
+├── App.css             # App-specific styles
 ├── main.tsx            # Application entry point
 └── index.css           # Global styles & Tailwind imports
 ```

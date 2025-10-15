@@ -126,15 +126,18 @@ const CertificatesCarousel = () => {
 
             {/* Progress Indicators */}
             <div className="flex justify-center gap-2 mt-6">
-              {Array.from({ length: maxIndex + 1 }).map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToIndex(index)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    index === currentIndex ? "w-8 bg-primary" : "w-2 bg-muted"
-                  }`}
-                />
-              ))}
+              {Array.from({ length: Math.ceil(certificates.length / CAROUSEL.ITEMS_PER_VIEW) }).map((_, index) => {
+                const pageIndex = index * CAROUSEL.ITEMS_PER_VIEW;
+                return (
+                  <button
+                    key={index}
+                    onClick={() => goToIndex(pageIndex)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      currentIndex === pageIndex ? "w-8 bg-primary" : "w-2 bg-muted"
+                    }`}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>

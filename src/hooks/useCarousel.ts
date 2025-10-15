@@ -40,21 +40,21 @@ export const useCarousel = ({
     if (!autoScroll) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+      setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + itemsPerView));
     }, autoScrollInterval);
 
     return () => clearInterval(interval);
-  }, [autoScroll, maxIndex, autoScrollInterval]);
+  }, [autoScroll, maxIndex, autoScrollInterval, itemsPerView]);
 
   const goToNext = useCallback(() => {
     setAutoScroll(false);
-    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-  }, [maxIndex]);
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + itemsPerView));
+  }, [maxIndex, itemsPerView]);
 
   const goToPrevious = useCallback(() => {
     setAutoScroll(false);
-    setCurrentIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
-  }, [maxIndex]);
+    setCurrentIndex((prev) => (prev === 0 ? maxIndex : prev - itemsPerView));
+  }, [maxIndex, itemsPerView]);
 
   const goToIndex = useCallback((index: number) => {
     setAutoScroll(false);

@@ -15,15 +15,15 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     company: "PicCollage",
-    role: "AI & Automation Engineer",
+    role: "AI & Automation Developer",
     location: "Taipei City, Taiwan",
     period: "June 2025 – Present",
     current: true,
     logo: "🎨",
     achievements: [
-      "Architected n8n automation workflows integrating 6 platforms with Excel and VBA scripting, saving 50 minutes per iteration",
-      "Developed AI agents for dynamic bid optimization on Apple Search Ads, improving efficiency across 200+ campaigns",
-      "Redesigned HRIS system with 4 interconnected databases, reducing HR administrative overhead by 70%"
+      "Architected n8n automation workflows that integrated data extraction from 4 platforms, saving 50 minutes per iteration",
+      "Redesigned HRIS system with 4 interconnected databases, reducing HR administrative overhead by 70%",
+      "Hosted company Hackathon and coordinated technical support and AI tool management"
     ]
   },
   {

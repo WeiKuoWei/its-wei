@@ -20,6 +20,7 @@ const CertificatesCarousel = () => {
     goToNext,
     goToPrevious,
     goToIndex,
+    setAutoScroll,
   } = useCarousel({
     itemCount: sortedCertificates.length,
     itemsPerView: CAROUSEL.ITEMS_PER_VIEW,
@@ -83,6 +84,7 @@ const CertificatesCarousel = () => {
                       key={currentIndex + index}
                       certificate={cert}
                       index={currentIndex + index}
+                      onAutoScrollChange={setAutoScroll}
                     />
                   ))}
                 </motion.div>

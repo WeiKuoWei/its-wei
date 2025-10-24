@@ -35,13 +35,13 @@ const Hero = () => {
           <div className="text-xl md:text-3xl text-foreground font-light min-h-[2.5rem]">
             <TypeAnimation
               sequence={[
-                "AI & Automation Engineer",
+                "AI & Automation",
                 2000,
                 "Machine Learning Researcher",
                 2000,
                 "Full-Stack Developer",
                 2000,
-                "Problem Solver",
+                "Product Manager",
                 2000,
               ]}
               wrapper="span"

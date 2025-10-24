@@ -14,9 +14,10 @@ import { Certificate } from "@/data/certificates";
 interface ExpandableCertificateCardProps {
   certificate: Certificate;
   index: number;
+  onAutoScrollChange?: (enabled: boolean) => void;
 }
 
-const ExpandableCertificateCard = ({ certificate, index }: ExpandableCertificateCardProps) => {
+const ExpandableCertificateCard = ({ certificate, index, onAutoScrollChange }: ExpandableCertificateCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const Icon = certificate.Icon;
   const hasChildren = certificate.children && certificate.children.length > 0;
@@ -25,7 +26,12 @@ const ExpandableCertificateCard = ({ certificate, index }: ExpandableCertificate
     <>
       <Card
         key={index}
-        onClick={() => hasChildren && setIsOpen(true)}
+        onClick={() => {
+          if (hasChildren) {
+            setIsOpen(true);
+            onAutoScrollChange?.(false);
+          }
+        }}
         className={`gradient-border hover-glow group transform transition-all duration-300 hover:scale-[1.02] ${
           hasChildren ? "cursor-pointer" : ""
         } ${certificate.featured ? "ring-2 ring-yellow-400/50 shadow-lg shadow-yellow-400/20" : ""}`}
@@ -105,7 +111,13 @@ const ExpandableCertificateCard = ({ certificate, index }: ExpandableCertificate
 
       {/* Modal for Child Certificates */}
       {hasChildren && (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog
+          open={isOpen}
+          onOpenChange={(open) => {
+            setIsOpen(open);
+            onAutoScrollChange?.(open ? false : true);
+          }}
+        >
           <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2">

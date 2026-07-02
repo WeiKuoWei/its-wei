@@ -13,6 +13,7 @@ interface Props {
 const Section = ({ id, index, kicker, children }: Props) => (
   <section id={id} className="relative px-5 md:px-10 py-24 md:py-36 scroll-mt-16">
     <div className="max-w-[1400px] mx-auto">
+      <h2 className="sr-only">{kicker}</h2>
       <div className="rule pt-4 flex items-baseline justify-between" data-reveal>
         <span className="kicker">
           <span className="text-accent">{index}</span> / {kicker}

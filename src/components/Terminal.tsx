@@ -188,7 +188,7 @@ const Terminal = ({ open, onClose }: { open: boolean; onClose: () => void }) => 
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={onKey}
-              className="flex-1 bg-transparent outline-none text-paper caret-term"
+              className="term-input flex-1 bg-transparent outline-none text-paper caret-term"
               spellCheck={false}
               autoCapitalize="off"
               autoComplete="off"

@@ -53,11 +53,12 @@ const About = () => {
                     the regional intern competition.
                   </p>
                   <p>
-                    Currently, I serve as an{" "}
-                    <span className="text-primary font-semibold">AI & Automation Engineer</span> at{" "}
-                    <span className="text-primary font-semibold">PicCollage</span>, where I architect intelligent
-                    workflows, develop AI-powered optimization systems, and lead initiatives that save hundreds of hours
-                    in manual work.
+                    Currently, I'm a{" "}
+                    <span className="text-primary font-semibold">Co-founder & Founding Engineer</span> at{" "}
+                    <span className="text-primary font-semibold">GitRoll</span>, where I architect the SkillsGraph
+                    Analyzer — the engine mapping developers' real git commits to skill checkpoints — lead an AI
+                    auto-grading engine for a US federal workforce contract, and build agentic automation that runs
+                    company operations.
                   </p>
                 </div>
               </div>
@@ -111,7 +112,7 @@ const About = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-2">Honors</h3>
-                    <p className="text-sm text-muted-foreground">Magna Cum Laude (GPA: 3.935)</p>
+                    <p className="text-sm text-muted-foreground">Magna Cum Laude (GPA: 3.94)</p>
                     <p className="text-sm font-medium text-primary mt-1">NYU Abu Dhabi Founder's Day Award</p>
                   </div>
                 </div>
@@ -126,8 +127,8 @@ const About = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-2">Publications</h3>
-                    <p className="text-sm text-muted-foreground">First Author</p>
-                    <p className="text-sm font-medium text-primary mt-1">Under Review at COLM'25</p>
+                    <p className="text-sm text-muted-foreground">3 papers under review</p>
+                    <p className="text-sm font-medium text-primary mt-1">First author at ICWSM'26 • Co-author ×2 at IEEE IECON 2026</p>
                   </div>
                 </div>
               </CardContent>

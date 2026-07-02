@@ -54,13 +54,13 @@ const Research = () => {
                   <div>
                     <h3 className="text-2xl font-bold mb-2">Featured Publication</h3>
                     <p className="text-xl font-semibold text-primary mb-2">
-                      Neutralizing Narratives: Debias News Articles with AI
+                      Neutralizing Narratives: Debiasing News Articles with AI
                     </p>
                     <p className="text-sm text-muted-foreground mb-1">
                       <span className="font-semibold">Wei Kuo</span>, Kevin Chu, Nouar AlDahoul, Hazem Ibrahim, Talal Rahwan, and Yasir Zaki
                     </p>
                     <p className="text-sm text-muted-foreground mb-4">
-                      Under Review at COLM'25
+                      Under Review at ICWSM'26
                     </p>
                   </div>
                 </div>

@@ -1,105 +1,47 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Mail, MapPin } from "lucide-react";
-import { SOCIAL_LINKS } from "@/config/socialLinks";
+/**
+ * Contact: one massive mailto CTA + socials ledger. No form.
+ */
+import { EMAIL, SOCIALS } from "@/data/site";
+import Section from "./Section";
 
-const Contact = () => {
-  return (
-    <section id="contact" className="py-24 bg-slate-50 light-section">
-      <div className="container mx-auto px-6">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">
-            Let's <span className="gradient-text">Connect</span>
-          </h2>
-          <p className="text-muted-foreground text-center mb-12">
-            Open to opportunities in AI, machine learning, and full-stack development
+const Contact = () => (
+  <Section id="contact" index="05" kicker="contact">
+    <div data-reveal>
+      <p className="text-paper-dim max-w-md">
+        Open to opportunities in agents, ML systems, and full-stack AI. Based in Taipei, works everywhere.
+      </p>
+      <a
+        href={`mailto:${EMAIL}`}
+        className="group block mt-10 font-display font-semibold tracking-[-0.03em] leading-none text-[clamp(1.8rem,7.5vw,7rem)] text-paper hover:text-accent transition-colors break-all"
+      >
+        {EMAIL}
+        <span className="inline-block ml-3 transition-transform group-hover:translate-x-2 group-hover:-translate-y-2">
+          ↗
+        </span>
+      </a>
+    </div>
+
+    <div className="mt-16 grid md:grid-cols-3 gap-px bg-ink-3 border border-ink-3" data-reveal>
+      {SOCIALS.filter((s) => s.id !== "email").map((s) => (
+        <a
+          key={s.id}
+          href={s.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-ink p-6 group hover:bg-ink-2 transition-colors"
+        >
+          <p className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-paper-faint">{s.label}</p>
+          <p className="mt-2 text-paper group-hover:text-accent transition-colors font-mono text-sm">
+            {s.handle} ↗
           </p>
-
-          <Card className="gradient-border">
-            <CardContent className="pt-6">
-              <div className="space-y-6">
-                {SOCIAL_LINKS.filter((link) => link.id === "email").map((link) => (
-                  <div key={link.id} className="flex items-center gap-3 text-left">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <link.Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">{link.label}</p>
-                      <a
-                        href={link.href}
-                        className="text-base font-medium text-[hsl(var(--light-section-text))] hover:text-primary transition-colors"
-                      >
-                        {link.username}
-                      </a>
-                    </div>
-                  </div>
-                ))}
-
-                <div className="flex items-center gap-3 text-left">
-                  <div className="p-3 bg-primary/10 rounded-lg">
-                    <MapPin className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Location</p>
-                    <p className="text-base font-medium text-[hsl(var(--light-section-text))]">Taipei City, Taiwan</p>
-                  </div>
-                </div>
-
-                {SOCIAL_LINKS.filter((link) => link.id === "github").map((link) => (
-                  <div key={link.id} className="flex items-center gap-3 text-left">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <link.Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">{link.label}</p>
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-base font-medium text-[hsl(var(--light-section-text))] hover:text-primary transition-colors"
-                      >
-                        {link.username}
-                      </a>
-                    </div>
-                  </div>
-                ))}
-
-                <div className="pt-6 border-t border-border">
-                  <h4 className="text-sm font-semibold text-[hsl(var(--light-section-text))] mb-4">Social Links</h4>
-                  <div className="flex gap-4">
-                    {SOCIAL_LINKS.map((link) => (
-                      <Button
-                        key={link.id}
-                        size="icon"
-                        variant="outline"
-                        className="border-primary/50 hover:bg-primary/10 hover:scale-110 transition-transform"
-                        asChild
-                      >
-                        <a
-                          href={link.href}
-                          target={link.external ? "_blank" : undefined}
-                          rel={link.external ? "noopener noreferrer" : undefined}
-                        >
-                          <link.Icon className="w-5 h-5" />
-                        </a>
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-
-                <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90 hover-glow">
-                  <a href="mailto:ck3294@nyu.edu">
-                    <Mail className="w-4 h-4 mr-2" />
-                    Email Me
-                  </a>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        </a>
+      ))}
+      <div className="bg-ink p-6">
+        <p className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-paper-faint">Location</p>
+        <p className="mt-2 text-paper font-mono text-sm">Taipei, Taiwan · UTC+8</p>
       </div>
-    </section>
-  );
-};
+    </div>
+  </Section>
+);
 
 export default Contact;

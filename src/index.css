@@ -1,129 +1,141 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ---------- Fonts (self-hosted; Fontshare ITF-FFL + JetBrains OFL) ---------- */
+@font-face {
+  font-family: "Clash Display";
+  src: url("/fonts/ClashDisplay-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Clash Display";
+  src: url("/fonts/ClashDisplay-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "General Sans";
+  src: url("/fonts/GeneralSans-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "General Sans";
+  src: url("/fonts/GeneralSans-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "General Sans";
+  src: url("/fonts/GeneralSans-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
 
-@layer base {
-  :root {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
+/* ---------- Design tokens ---------- */
+@theme {
+  --font-display: "Clash Display", "General Sans", sans-serif;
+  --font-sans: "General Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-    --card: 217 33% 15%;
-    --card-foreground: 210 40% 98%;
+  --color-ink: #0a0a0b; /* page ground */
+  --color-ink-2: #101013; /* raised surfaces */
+  --color-ink-3: #1a1a1f; /* borders / higher surfaces */
+  --color-paper: #ecebe6; /* primary text, warm off-white */
+  --color-paper-dim: #91908a; /* secondary text */
+  --color-paper-faint: #7b7a74; /* tertiary text — AA on ink */
+  --color-rule: #26262b; /* hairline rules/borders */
+  --color-accent: #ff4d00; /* editorial international orange */
+  --color-term: #7ee787; /* terminal green — terminal UI only */
 
-    --popover: 217 33% 15%;
-    --popover-foreground: 210 40% 98%;
+  --animate-blink: blink 1.1s step-end infinite;
+}
 
-    --primary: 189 94% 43%;
-    --primary-foreground: 222 47% 11%;
-
-    --secondary: 230 48% 48%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-
-    --accent: 189 94% 43%;
-    --accent-foreground: 222 47% 11%;
-
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217 33% 20%;
-    --input: 217 33% 20%;
-    --ring: 189 94% 43%;
-
-    --radius: 0.75rem;
-    
-    /* Custom tokens for personal branding site */
-    --gradient-primary: linear-gradient(135deg, hsl(230 48% 48%) 0%, hsl(189 94% 43%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(222 47% 11%) 0%, hsl(230 48% 20%) 100%);
-    --glow: 0 0 20px hsl(189 94% 43% / 0.3);
-    --glow-strong: 0 0 40px hsl(189 94% 43% / 0.6);
-    
-    /* Light sections tokens */
-    --light-section-text: 222 47% 15%;
-    --light-section-muted: 220 15% 45%;
-    --light-card: 0 0% 100%;
-    --light-card-border: 220 13% 91%;
+@keyframes blink {
+  50% {
+    opacity: 0;
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
+/* ---------- Base ---------- */
+html {
+  background: var(--color-ink);
+  color-scheme: dark;
+}
 
-  body {
-    @apply bg-background text-foreground;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  }
-  
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+/* Accessible focus — never bare :focus */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Terminal input: blinking caret is the focus affordance */
+.term-input:focus-visible {
+  outline: none;
+}
+
+/* Skip link */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  transform: translateY(-200%);
+  transition: transform 0.15s ease;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 0.5rem 0.9rem;
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* Editorial rule line */
+.rule {
+  border-top: 1px solid var(--color-rule);
+}
+
+/* Mono kicker label used across sections */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-paper-dim);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
   html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
-  }
-}
-
-@layer utilities {
-  .gradient-text {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  .gradient-border {
-    position: relative;
-    background: hsl(var(--card));
-    border: 1px solid transparent;
-  }
-  
-  .gradient-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 1px;
-    background: var(--gradient-primary);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    border-radius: inherit;
-    pointer-events: none;
-  }
-  
-  .hover-glow {
-    transition: all 0.3s ease;
-  }
-  
-  .hover-glow:hover {
-    box-shadow: var(--glow);
-    transform: translateY(-2px);
-  }
-  
-  /* Light section styling */
-  .light-section {
-    @apply text-[hsl(var(--light-section-text))];
-  }
-  
-  .light-section .text-muted-foreground {
-    @apply text-[hsl(var(--light-section-muted))];
-  }
-  
-  .light-section .gradient-border {
-    background: hsl(var(--light-card));
-    border-color: hsl(var(--light-card-border));
-  }
-  
-  .light-section h1,
-  .light-section h2,
-  .light-section h3,
-  .light-section h4,
-  .light-section h5,
-  .light-section h6 {
-    @apply text-[hsl(var(--light-section-text))];
+    scroll-behavior: auto;
   }
 }

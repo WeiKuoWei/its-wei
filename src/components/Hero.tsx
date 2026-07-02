@@ -1,68 +1,91 @@
-import { TypeAnimation } from "react-type-animation";
-import ParticlesBackground from "./ParticlesBackground";
-import SocialLinks from "./SocialLinks";
-import avatar from "@/assets/avatar.jpg";
+/**
+ * Editorial hero: masthead readouts, massive Clash Display headline (SplitText
+ * masked line reveal), mono status line. LCP = the headline text, never the shader.
+ */
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import { gsap, SplitText, OK_MOTION, REDUCED } from "@/lib/motion";
+import DecoderText from "./DecoderText";
 
 const Hero = () => {
+  const root = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+
+      mm.add(OK_MOTION, () => {
+        document.fonts.ready.then(() => {
+          const split = SplitText.create("[data-headline]", {
+            type: "lines",
+            mask: "lines",
+            linesClass: "line",
+          });
+          gsap.from(split.lines, {
+            yPercent: 110,
+            duration: 0.9,
+            stagger: 0.09,
+            ease: "power4.out",
+            delay: 0.15,
+          });
+          gsap.from("[data-fade]", {
+            opacity: 0,
+            y: 14,
+            duration: 0.7,
+            stagger: 0.08,
+            ease: "power2.out",
+            delay: 0.75,
+          });
+        });
+      });
+
+      mm.add(REDUCED, () => {
+        gsap.set("[data-headline], [data-fade]", { opacity: 1, y: 0 });
+      });
+    },
+    { scope: root },
+  );
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Dark Background */}
-      <div className="absolute inset-0 bg-slate-950 z-0"></div>
-
-      {/* Particles */}
-      <ParticlesBackground />
-
-      {/* Content */}
-      <div className="container mx-auto px-6 relative z-10 text-center">
-        <div className="max-w-4xl mx-auto space-y-8">
-          {/* Avatar */}
-          <div className="animate-fade-in">
-            <div className="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden ring-4 ring-primary/30 shadow-[0_0_40px_rgba(0,222,255,0.4)]">
-              <img
-                src={avatar}
-                alt="Wei Kuo"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-
-          {/* Name with animated entrance */}
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight animate-slide-in">
-            <span className="gradient-text">Wei Kuo</span>
-          </h1>
-
-          {/* Typing Animation for Tagline */}
-          <div className="text-xl md:text-3xl text-foreground font-light min-h-[2.5rem]">
-            <TypeAnimation
-              sequence={[
-                "Co-founder & Founding Engineer",
-                2000,
-                "AI Agents Engineer",
-                2000,
-                "Machine Learning Researcher",
-                2000,
-                "Full-Stack Developer",
-                2000,
-              ]}
-              wrapper="span"
-              speed={50}
-              repeat={Infinity}
-            />
-          </div>
-
-
-          {/* Social Links */}
-          <div className="pt-8">
-            <SocialLinks variant="hero" />
-          </div>
-        </div>
+    <section ref={root} className="relative min-h-svh flex flex-col justify-between px-5 md:px-10" id="top">
+      {/* masthead row */}
+      <div className="pt-24 md:pt-28 flex items-baseline justify-between font-mono text-[0.72rem] tracking-[0.18em] uppercase text-paper-dim" data-fade>
+        <span className="text-paper">Wei Kuo</span>
+        <span className="hidden md:inline">Taipei · 25.03°N 121.56°E</span>
+        <span>
+          <DecoderText text="v2.0 — 2026" delay={1.1} />
+        </span>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-primary/50 rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-3 bg-primary rounded-full animate-pulse"></div>
-        </div>
+      {/* headline */}
+      <div className="flex-1 flex flex-col justify-center max-w-[1400px]">
+        <p className="kicker mb-6 !text-paper-dim" data-fade>
+          Co-founder & Founding Engineer, GitRoll
+        </p>
+        <h1
+          data-headline
+          className="font-display font-semibold text-paper leading-[0.95] tracking-[-0.03em] text-[clamp(2.1rem,9vw,9.5rem)] text-balance"
+        >
+          Builds agents
+          <br />
+          that build things<span className="text-accent">.</span>
+        </h1>
+        <p className="mt-8 max-w-xl text-paper-dim text-base md:text-lg leading-relaxed" data-fade>
+          AI engineer and first-author ML researcher. Ships agentic systems, ML pipelines, and the
+          automation around them — from git-commit skill graphs to federal-grade auto-grading engines.
+        </p>
+      </div>
+
+      {/* bottom readout row */}
+      <div className="pb-8 flex items-end justify-between gap-4 font-mono text-[0.72rem] tracking-[0.18em] uppercase text-paper-dim" data-fade>
+        <span className="flex items-center gap-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-term animate-blink" />
+          <span>now: shipping GitRoll's assessment engine</span>
+        </span>
+        <span className="hidden md:inline">
+          press <kbd className="text-term">`</kbd> for console
+        </span>
+        <span aria-hidden>scroll ↓</span>
       </div>
     </section>
   );

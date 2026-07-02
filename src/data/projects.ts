@@ -9,7 +9,7 @@ export interface Project {
   tech: string[];
   category: string;
   featured?: boolean;
-  link: string;
+  link?: string;
 }
 
 export const featuredProjects: Project[] = [
@@ -27,7 +27,6 @@ export const featuredProjects: Project[] = [
     tech: ["React", "TypeScript", "Express", "PostgreSQL", "Drizzle", "OpenAI", "Vercel"],
     category: "ML/AI",
     featured: true,
-    link: "https://github.com/WeiKuoWei",
   },
 ];
 

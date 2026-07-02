@@ -49,8 +49,8 @@ const Hero = () => {
   return (
     <section ref={root} className="relative min-h-svh flex flex-col justify-between px-5 md:px-10" id="top">
       {/* masthead row */}
-      <div className="pt-24 md:pt-28 flex items-baseline justify-between font-mono text-[0.7rem] tracking-[0.18em] uppercase text-paper-dim" data-fade>
-        <span>Wei Kuo — 郭宸維</span>
+      <div className="pt-24 md:pt-28 flex items-baseline justify-between font-mono text-[0.72rem] tracking-[0.18em] uppercase text-paper-dim" data-fade>
+        <span className="text-paper">Wei Kuo</span>
         <span className="hidden md:inline">Taipei · 25.03°N 121.56°E</span>
         <span>
           <DecoderText text="v2.0 — 2026" delay={1.1} />
@@ -59,7 +59,7 @@ const Hero = () => {
 
       {/* headline */}
       <div className="flex-1 flex flex-col justify-center max-w-[1400px]">
-        <p className="kicker mb-6" data-fade>
+        <p className="kicker mb-6 !text-paper-dim" data-fade>
           Co-founder & Founding Engineer, GitRoll
         </p>
         <h1
@@ -77,10 +77,13 @@ const Hero = () => {
       </div>
 
       {/* bottom readout row */}
-      <div className="pb-8 flex items-end justify-between font-mono text-[0.7rem] tracking-[0.18em] uppercase text-paper-faint" data-fade>
+      <div className="pb-8 flex items-end justify-between gap-4 font-mono text-[0.72rem] tracking-[0.18em] uppercase text-paper-dim" data-fade>
         <span className="flex items-center gap-2">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-term animate-blink" />
-          <span className="text-paper-dim">open to interesting problems</span>
+          <span>now: shipping GitRoll's assessment engine</span>
+        </span>
+        <span className="hidden md:inline">
+          press <kbd className="text-term">`</kbd> for console
         </span>
         <span aria-hidden>scroll ↓</span>
       </div>

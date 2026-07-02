@@ -33,7 +33,7 @@ const Work = () => (
           <ul className="md:col-span-6 space-y-3 text-paper-dim leading-relaxed text-[0.95rem]">
             {exp.achievements.map((a) => (
               <li key={a} className="pl-4 relative">
-                <span className="absolute left-0 top-[0.6em] w-1.5 h-px bg-accent" aria-hidden />
+                <span className="absolute left-0 top-[0.6em] w-2.5 h-[2px] bg-accent" aria-hidden />
                 {a}
               </li>
             ))}

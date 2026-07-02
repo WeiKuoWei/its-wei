@@ -20,12 +20,12 @@ const Research = () => (
               </span>
               <p className="md:col-span-8 text-paper leading-snug group-hover:text-accent transition-colors text-balance">
                 {pub.title}
-                {pub.link && <span className="ml-2 text-paper-faint group-hover:text-accent">↗</span>}
               </p>
               <p className="md:col-span-3 font-mono text-[0.7rem] uppercase tracking-[0.15em] text-paper-dim pt-1 md:text-right">
                 {pub.role}
                 <br />
                 <span className="text-paper-faint">{pub.venue}</span>
+                {pub.link && <span className="block text-accent mt-1">arXiv ↗</span>}
               </p>
             </div>
           );
@@ -43,6 +43,9 @@ const Research = () => (
     </div>
 
     {/* Lab roles */}
+    <h3 className="font-display font-medium text-2xl md:text-3xl tracking-tight mb-8" data-reveal>
+      Research roles
+    </h3>
     <div className="grid md:grid-cols-2 gap-10">
       {research.map((lab) => (
         <div key={lab.institution} className="rule pt-6" data-reveal>
@@ -53,7 +56,7 @@ const Research = () => (
           <ul className="mt-5 space-y-2.5 text-paper-dim text-[0.95rem] leading-relaxed">
             {lab.highlights.map((h) => (
               <li key={h} className="pl-4 relative">
-                <span className="absolute left-0 top-[0.6em] w-1.5 h-px bg-accent" aria-hidden />
+                <span className="absolute left-0 top-[0.6em] w-2.5 h-[2px] bg-accent" aria-hidden />
                 {h}
               </li>
             ))}

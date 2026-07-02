@@ -17,12 +17,9 @@ import {
   Network,
   Rocket,
   Settings,
-  Shield,
   Trophy,
-  TrendingUp,
   Wrench,
   Lightbulb,
-  Heart,
 } from "lucide-react";
 
 export type CertificateCategory = 'degree' | 'award' | 'specialization' | 'course' | 'standalone';
@@ -239,37 +236,9 @@ export const certificates: Certificate[] = [
     title: "American Region Mathematics League International",
     issuer: "ARML",
     achievement: "3rd Place in International Mathematics Competition",
-    date: "2019",
+    date: "June 2020",
     Icon: Award,
     description: "Top performance in prestigious high school mathematics competition",
-    featured: false,
-    category: 'award',
-  },
-  {
-    title: "CITI Program - Investigators Conducting Exempt Research",
-    issuer: "CITI Program",
-    achievement: "Basic Course Completion",
-    date: "March 2024",
-    Icon: Shield,
-    description: "Research ethics training for conducting exempt human subjects research",
-    category: 'standalone',
-  },
-  {
-    title: "Supervised Machine Learning: Regression and Classification",
-    issuer: "DeepLearning.AI & Stanford University",
-    achievement: "Machine Learning Specialization Course",
-    date: "July 2023",
-    Icon: TrendingUp,
-    description: "Foundational supervised learning algorithms and techniques",
-    category: 'standalone',
-  },
-  {
-    title: "Adult-to-Adult Mental Health First Aid",
-    issuer: "The LightHouse Arabia",
-    achievement: "Mental Health First Aid Certification",
-    date: "February 2024",
-    Icon: Heart, // or HeartHandshake
-    description: "Evidence-based training to identify and respond to mental health crises with empathy",
     featured: false,
     category: 'award',
   }

@@ -1,24 +1,25 @@
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+/**
+ * Terminal-styled 404.
+ */
+import { Link } from "react-router-dom";
+import DecoderText from "@/components/DecoderText";
 
-const NotFound = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
-  }, [location.pathname]);
-
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-gray-600">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 underline hover:text-blue-700">
-          Return to Home
-        </a>
-      </div>
-    </div>
-  );
-};
+const NotFound = () => (
+  <main className="min-h-svh flex flex-col items-center justify-center px-6 font-mono">
+    <p className="text-paper-faint text-[0.7rem] uppercase tracking-[0.18em]">wei@taipei:~$ cat {location.pathname}</p>
+    <h1 className="mt-6 font-display font-semibold text-[clamp(4rem,18vw,12rem)] leading-none text-paper">
+      4<span className="text-accent">0</span>4
+    </h1>
+    <p className="mt-4 text-paper-dim text-sm">
+      <DecoderText text="cat: no such file or directory" />
+    </p>
+    <Link
+      to="/"
+      className="mt-10 text-term text-sm hover:brightness-125 transition"
+    >
+      cd ~ ↵
+    </Link>
+  </main>
+);
 
 export default NotFound;

@@ -41,10 +41,10 @@ export const research: ResearchExperience[] = [
       "Studied racial and gender bias trends in 10 major news publishers across 355k+ articles from the past decade",
       "Leveraged 6 state-of-the-art LLMs for bias detection and removal via few-shot learning and ensembles",
       "Designed a large-scale crowdsourced study with randomized controlled trials and causal inference analysis",
-      "First author: 'Neutralizing Narratives: Debiasing News Articles with AI' (Under Review at ICWSM'26)"
+      "First author: 'Neutralizing the Narrative: AI-Powered Debiasing of Online News Articles' (Under Review at ICWSM'26)"
     ],
     paper: {
-      title: "Neutralizing Narratives: Debiasing News Articles with AI",
+      title: "Neutralizing the Narrative: AI-Powered Debiasing of Online News Articles",
       authors: "Wei Kuo, Kevin Chu, Nouar AlDahoul, Hazem Ibrahim, Talal Rahwan, and Yasir Zaki",
       status: "Under Review at ICWSM'26",
       arxivLink: "https://arxiv.org/abs/2504.03520"
@@ -62,7 +62,7 @@ export interface Publication {
 /** All publications, newest first */
 export const publications: Publication[] = [
   {
-    title: "Neutralizing Narratives: Debiasing News Articles with AI",
+    title: "Neutralizing the Narrative: AI-Powered Debiasing of Online News Articles",
     role: "First Author",
     venue: "Under Review at ICWSM'26",
     link: "https://arxiv.org/abs/2504.03520"

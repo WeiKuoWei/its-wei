@@ -6,7 +6,7 @@ import DecoderText from "@/components/DecoderText";
 
 const NotFound = () => (
   <main className="min-h-svh flex flex-col items-center justify-center px-6 font-mono">
-    <p className="text-paper-faint text-[0.7rem] uppercase tracking-[0.18em]">wei@taipei:~$ cat {location.pathname}</p>
+    <p className="text-paper-faint text-[0.7rem] tracking-[0.08em]">wei@taipei:~$ cat {location.pathname}</p>
     <h1 className="mt-6 font-display font-semibold text-[clamp(4rem,18vw,12rem)] leading-none text-paper">
       4<span className="text-accent">0</span>4
     </h1>

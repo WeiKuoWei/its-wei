@@ -19,7 +19,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     title: "Backend & Web",
-    skills: ["FastAPI", "Node.js", "Next.js", "React", "PostgreSQL", "Prisma", "MongoDB"],
+    skills: ["FastAPI", "Node.js", "Express", "Next.js", "React", "PostgreSQL", "Prisma", "MongoDB"],
   },
   {
     title: "Cloud & DevOps",

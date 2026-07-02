@@ -17,20 +17,38 @@ interface Line {
 
 const BOOT: Line[] = [
   { type: "out", text: "wei-console 2.0 — agent runtime attached" },
-  { type: "out", text: "type `help` for commands" },
+  { type: "out", text: "this site was rebuilt by an agent. type `trace` to replay the run, `help` for commands" },
 ];
 
 const HELP = [
   "help          this list",
+  "trace         replay the agent run that rebuilt this site",
   "whoami        one-liner",
   "work          employment log",
   "projects      shipped things",
   "papers        publications",
   "resume        open resume pdf",
   "contact       how to reach me",
+  "hire          availability",
   "goto <id>     scroll to section (work/research/projects/credentials/contact)",
   "clear         wipe console",
   "exit          close console",
+];
+
+/** Sanitized excerpt of the actual run that produced this site (2026-07-02, Fable 5). */
+const TRACE = [
+  "replay: portfolio-rebuild · claude-fable-5 · 2026-07-02 (this site)",
+  "[15:25:17] goal.set         rebuild · 8h budget · 10 hard gates + 6 adjudicated",
+  "[15:25:31] agents.spawn     3× component-hunt (react-libs / gsap-demos / webgl+terminal)",
+  "[15:27:44] facts.sync       resume-2026-06 → site data (role, ICWSM'26, +2 papers)",
+  "[15:31:12] privacy.gate     grep NEVER-public list → 0 hits · resume rebuilt sans phone",
+  "[15:36:58] pr.merge         #3 content+cleanup → main · pages deploy green",
+  "[15:39:21] deps.swap        framer-motion → gsap+lenis · shadcn 62→4 · +shader bg",
+  "[15:52:09] poc.hero         splittext mask reveal · 390px verified · iterate",
+  "[16:18:44] lighthouse       perf 94 · a11y 100 · seo 100 · bp 100",
+  "[16:24:30] adversary.spawn  3× critics — design / facts / privacy — try to break it",
+  "[16:31:05] fixes.apply      contrast ×4 · fact errors ×4 · this console you're using",
+  "[……] you are here — inside the artifact",
 ];
 
 const Terminal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
@@ -40,6 +58,14 @@ const Terminal = ({ open, onClose }: { open: boolean; onClose: () => void }) => 
   const [histIdx, setHistIdx] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const traceTimer = useRef<number | null>(null);
+
+  useEffect(
+    () => () => {
+      if (traceTimer.current) clearTimeout(traceTimer.current);
+    },
+    [],
+  );
 
   useEffect(() => {
     if (open) inputRef.current?.focus();
@@ -73,7 +99,7 @@ const Terminal = ({ open, onClose }: { open: boolean; onClose: () => void }) => 
           print(experiences.map((e) => `${e.period.padEnd(22)} ${e.company} — ${e.role}`));
           break;
         case "projects":
-          print(allProjects.map((p) => `${p.title}  →  ${p.link}`));
+          print(allProjects.map((p) => `${p.title}  →  ${p.link ?? "private repo — ask me"}`));
           break;
         case "papers":
           print(publications.map((p, i) => `[P${i + 1}] ${p.title} (${p.role}, ${p.venue})`));
@@ -94,12 +120,28 @@ const Terminal = ({ open, onClose }: { open: boolean; onClose: () => void }) => 
           } else print(["usage: goto <work|research|projects|credentials|contact>"]);
           break;
         }
-        case "sudo":
-          print(
-            args.join(" ") === "hire-me"
-              ? ["permission granted. drafting offer…", `(actually: ${EMAIL})`]
-              : ["sudo: only `sudo hire-me` is permitted here"],
-          );
+        case "trace": {
+          if (traceTimer.current) return;
+          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            print(TRACE);
+            break;
+          }
+          let i = 0;
+          const step = () => {
+            print([TRACE[i]]);
+            i += 1;
+            traceTimer.current = i < TRACE.length ? window.setTimeout(step, 260) : null;
+          };
+          step();
+          break;
+        }
+        case "hire":
+          print([
+            "status:    open to interesting problems",
+            "focus:     agents · ml systems · full-stack ai",
+            "timezone:  UTC+8 (taipei), works everywhere",
+            `channel:   ${EMAIL}`,
+          ]);
           break;
         case "ls":
           print(["work/  research/  projects/  credentials/  contact/"]);
@@ -108,6 +150,10 @@ const Terminal = ({ open, onClose }: { open: boolean; onClose: () => void }) => 
           print(["/home/wei/portfolio"]);
           break;
         case "clear":
+          if (traceTimer.current) {
+            clearTimeout(traceTimer.current);
+            traceTimer.current = null;
+          }
           setLines([]);
           break;
         case "exit":

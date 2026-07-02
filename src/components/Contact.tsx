@@ -22,12 +22,12 @@ const Contact = () => (
     </div>
 
     <div className="mt-16 grid md:grid-cols-3 gap-px bg-ink-3 border border-ink-3" data-reveal>
-      {SOCIALS.map((s) => (
+      {SOCIALS.filter((s) => s.id !== "email").map((s) => (
         <a
           key={s.id}
           href={s.href}
-          target={s.id === "email" ? undefined : "_blank"}
-          rel={s.id === "email" ? undefined : "noopener noreferrer"}
+          target="_blank"
+          rel="noopener noreferrer"
           className="bg-ink p-6 group hover:bg-ink-2 transition-colors"
         >
           <p className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-paper-faint">{s.label}</p>
@@ -36,6 +36,10 @@ const Contact = () => (
           </p>
         </a>
       ))}
+      <div className="bg-ink p-6">
+        <p className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-paper-faint">Location</p>
+        <p className="mt-2 text-paper font-mono text-sm">Taipei, Taiwan · UTC+8</p>
+      </div>
     </div>
   </Section>
 );

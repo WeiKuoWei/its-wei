@@ -55,7 +55,8 @@
   --color-ink-3: #1a1a1f; /* borders / higher surfaces */
   --color-paper: #ecebe6; /* primary text, warm off-white */
   --color-paper-dim: #91908a; /* secondary text */
-  --color-paper-faint: #4b4b46; /* tertiary / rules */
+  --color-paper-faint: #7b7a74; /* tertiary text — AA on ink */
+  --color-rule: #26262b; /* hairline rules/borders */
   --color-accent: #ff4d00; /* editorial international orange */
   --color-term: #7ee787; /* terminal green — terminal UI only */
 
@@ -95,6 +96,11 @@ body {
   border-radius: 2px;
 }
 
+/* Terminal input: blinking caret is the focus affordance */
+.term-input:focus-visible {
+  outline: none;
+}
+
 /* Skip link */
 .skip-link {
   position: fixed;
@@ -115,7 +121,7 @@ body {
 
 /* Editorial rule line */
 .rule {
-  border-top: 1px solid var(--color-ink-3);
+  border-top: 1px solid var(--color-rule);
 }
 
 /* Mono kicker label used across sections */

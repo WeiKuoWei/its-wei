@@ -1,0 +1,75 @@
+<h2>Which design direction feels like you?</h2>
+<p class="subtitle">Four distinct directions for the rebuild. Each mini-preview shows the hero treatment. Click one (or two — multi-select on) and tell me in the terminal what draws you.</p>
+
+<div class="options" data-multiselect>
+
+  <div class="option" data-choice="editorial" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Editorial / Brutalist</h3>
+      <p>Massive typography, stark grid, monochrome + one loud accent. Feels like a magazine cover, not a template. Motion = type reveals, marquee ticker.</p>
+      <div class="mockup" style="margin-top:12px">
+        <div class="mockup-body" style="background:#f4f1ea;color:#111;padding:28px;font-family:Georgia,serif">
+          <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;border-bottom:2px solid #111;padding-bottom:6px;display:flex;justify-content:space-between"><span>Wei Kuo</span><span>Taipei — 25.03°N</span></div>
+          <div style="font-size:52px;font-weight:800;line-height:0.95;margin-top:18px;font-family:Helvetica,Arial,sans-serif;letter-spacing:-2px">AI &amp; AUTOMATION<br>ENGINEER<span style="color:#ff4d00">.</span></div>
+          <div style="margin-top:14px;font-size:13px;display:flex;gap:18px;font-family:monospace"><span style="border:1px solid #111;padding:2px 8px">PicCollage</span><span style="border:1px solid #111;padding:2px 8px">NYU AD '25</span><span style="border:1px solid #111;padding:2px 8px">arXiv first author</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="immersive" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Immersive Dark / Scroll-driven</h3>
+      <p>WebGL/canvas backdrop, scroll-choreographed scenes, glow accents. The "awwwards" look — highest jaw-drop ceiling, highest slop risk if generic. Needs restraint + custom touches.</p>
+      <div class="mockup" style="margin-top:12px">
+        <div class="mockup-body" style="background:radial-gradient(ellipse at 30% 20%,#12233f 0%,#05070d 60%);color:#e8eaf0;padding:28px;font-family:Inter,Arial,sans-serif;position:relative;overflow:hidden">
+          <div style="position:absolute;top:10px;right:20px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,#3b82f680,transparent 70%);filter:blur(10px)"></div>
+          <div style="font-size:12px;color:#7dd3fc;font-family:monospace">$ whoami</div>
+          <div style="font-size:40px;font-weight:700;letter-spacing:-1px;margin-top:10px">Wei Kuo<span style="color:#38bdf8">_</span></div>
+          <div style="font-size:14px;color:#94a3b8;margin-top:6px">Building agents that build things — PicCollage / NYU / TSMC</div>
+          <div style="margin-top:16px;font-size:11px;color:#475569">scroll ↓ scenes morph as you go</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="swiss" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Refined Minimal / Swiss</h3>
+      <p>Light, generous whitespace, precise type scale, subtle spring physics on every interaction. Quietly expensive feel — Linear/Vercel-adjacent. Ages best, least flashy.</p>
+      <div class="mockup" style="margin-top:12px">
+        <div class="mockup-body" style="background:#fcfcfa;color:#1a1a1a;padding:32px;font-family:Inter,Arial,sans-serif">
+          <div style="font-size:13px;color:#999">Wei Kuo — AI &amp; Automation Engineer</div>
+          <div style="font-size:30px;font-weight:600;letter-spacing:-0.5px;margin-top:14px;line-height:1.25">I build ML systems and the automation around them. Currently at PicCollage, Taipei.</div>
+          <div style="margin-top:20px;display:flex;gap:14px;font-size:13px"><span style="color:#0a66ff">Work ↗</span><span style="color:#0a66ff">Research ↗</span><span style="color:#0a66ff">GitHub ↗</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="terminal" onclick="toggleSelect(this)">
+    <div class="letter">D</div>
+    <div class="content">
+      <h3>Dev-Native / Terminal Playground</h3>
+      <p>Interactive terminal as the hero — visitors type commands (`projects`, `resume`, `contact`). Monospace everywhere, CRT touches. Memorable + very "automation engineer", polarizing for non-technical recruiters.</p>
+      <div class="mockup" style="margin-top:12px">
+        <div class="mockup-body" style="background:#0d1117;color:#c9d1d9;padding:24px;font-family:monospace;font-size:13px">
+          <div style="display:flex;gap:6px;margin-bottom:12px"><span style="width:10px;height:10px;border-radius:50%;background:#ff5f57;display:inline-block"></span><span style="width:10px;height:10px;border-radius:50%;background:#febc2e;display:inline-block"></span><span style="width:10px;height:10px;border-radius:50%;background:#28c840;display:inline-block"></span></div>
+          <div><span style="color:#7ee787">wei@taipei</span>:<span style="color:#79c0ff">~</span>$ whoami</div>
+          <div style="color:#8b949e;margin:4px 0">AI &amp; Automation Engineer @ PicCollage · NYUAD CS '25 · first-author @ arXiv</div>
+          <div><span style="color:#7ee787">wei@taipei</span>:<span style="color:#79c0ff">~</span>$ ls projects/</div>
+          <div style="color:#8b949e;margin:4px 0">weak-ties-ai/  multi-expert-system/  course-assistant/</div>
+          <div><span style="color:#7ee787">wei@taipei</span>:<span style="color:#79c0ff">~</span>$ <span style="background:#c9d1d9;color:#0d1117">&nbsp;</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section" style="margin-top:20px">
+  <p class="subtitle">Hybrids welcome — e.g. C's restraint + B's one signature interactive moment, or A's typography + D's terminal easter egg. Say so in the terminal.</p>
+</div>

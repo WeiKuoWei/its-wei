@@ -1,5 +1,6 @@
 /**
  * Project portfolio data
+ * Source of truth: latest resume (2026-06)
  */
 
 export interface Project {
@@ -14,44 +15,30 @@ export interface Project {
 export const featuredProjects: Project[] = [
   {
     title: "LinkedIn Weak Ties AI Assistant",
-    description: "Two-tier semantic search system identifying top connections from 1000+ LinkedIn profiles in under 100ms using multi-attribute vector search and GPT-4.1",
+    description: "Two-tier semantic search identifying the top 4 relevant connections from 1000+ LinkedIn profiles in under 100ms, with weighted multi-attribute vector search and an AI outreach generator",
     tech: ["Python", "FastAPI", "React", "ChromaDB", "Azure OpenAI", "Tailwind CSS"],
     category: "ML/AI",
     featured: true,
     link: "https://github.com/WeiKuoWei/linkedin-connector",
   },
   {
-    title: "Scalable AI Multi-Expert System",
-    description: "Multi-layer routing framework with 11 cross-domain experts achieving 95% routing accuracy, processing knowledge from 184 documents (5,000+ pages)",
-    tech: ["Python", "Langchain", "ChromaDB", "FastAPI", "React", "LLMs"],
+    title: "Savory Genius — AI Meal Planner",
+    description: "Full-stack AI meal planning app: GPT-4o-mini recipe generation from available ingredients, nutritional analysis, automated shopping lists, and calendar-based scheduling on a serverless Vercel deployment",
+    tech: ["React", "TypeScript", "Express", "PostgreSQL", "Drizzle", "OpenAI", "Vercel"],
     category: "ML/AI",
     featured: true,
-    link: "https://github.com/WeiKuoWei/semantic-router",
+    link: "https://github.com/WeiKuoWei",
   },
 ];
 
 export const otherProjects: Project[] = [
   {
-    title: "AI-Powered Course Assistant",
-    description: "Full-stack application with RAG techniques managing 10,000+ messages and 94 documents, deployed on Kubernetes",
-    tech: ["Python", "Langchain", "ChromaDB", "FastAPI"],
-    category: "ML/AI",
-    link: "https://github.com/WeiKuoWei/slack-chatbot",
-  },
-  {
-    title: "Online Telehealth Portal - Smartel",
-    description: "Scalable platform handling 1000+ concurrent users with AWS infrastructure",
-    tech: ["AWS", "FastAPI", "React", "PostgreSQL"],
+    title: "Online Telehealth Portal — Smartel",
+    description: "Telehealth portal for scheduling, recording, transcribing, and summarizing consultations with Whisper + GPT-4; scales to 1000+ concurrent users and 500 bookings/minute",
+    tech: ["AWS", "FastAPI", "React", "PostgreSQL", "OpenAI"],
     category: "Web",
     link: "https://github.com/WeiKuoWei/ai-powered-health-platform",
   },
-  {
-    title: "News Scraper",
-    description: "Tool for scraping 10+ years of historical news articles from CNN Fox News, and other major publishers via Wayback Machine",
-    tech: ["Python", "BeautifulSoup", "Pandas", "NewsPlease"],
-    category: "Data Engineering",
-    link: "https://github.com/WeiKuoWei/scrape-news-articles",
-  }
 ];
 
 export const allProjects: Project[] = [...featuredProjects, ...otherProjects];

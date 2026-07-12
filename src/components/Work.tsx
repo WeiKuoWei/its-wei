@@ -61,7 +61,9 @@ const Work = () => {
             start: "top 96px",
             end: () => `+=${window.innerHeight * (n - 1)}`,
             // Lenis + scrub double-smooths; without snap the deck parks mid-transition.
-            snap: { snapTo: 1 / (n - 1), duration: { min: 0.2, max: 0.5 }, ease: "power1.inOut", directional: true },
+            // Nearest-boundary (not directional): a directional snap pulled readers off
+            // slide 1 the moment the deck pinned, making the current role unreachable.
+            snap: { snapTo: 1 / (n - 1), duration: { min: 0.2, max: 0.5 }, ease: "power1.inOut", directional: false },
             onUpdate: (self) => {
               // flip the counter near arrival, not at the 50% midpoint
               const i = Math.min(n - 1, Math.floor(self.progress * (n - 1) + 0.25));

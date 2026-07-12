@@ -54,9 +54,11 @@ const Research = () => (
             {lab.role} · {lab.period}
           </p>
           <ul className="mt-5 space-y-2.5 text-paper-dim text-[0.95rem] leading-relaxed">
-            {lab.highlights.map((h) => (
-              <li key={h} className="pl-4 relative">
-                <span className="absolute left-0 top-[0.6em] w-2.5 h-[2px] bg-accent" aria-hidden />
+            {lab.highlights.map((h, i) => (
+              <li key={h} className="pl-9 relative">
+                <span className="absolute left-0 top-[0.28em] font-mono text-[0.68rem] text-paper-faint" aria-hidden>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 {h}
               </li>
             ))}

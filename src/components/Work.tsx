@@ -1,9 +1,9 @@
 /**
  * Work: pinned horizontal deck (variant W-A, Wei pick 2026-07-13) — one job per
- * slide with a single focal metric, stats debrief strip pinned above the deck.
+ * slide with a single focal metric, stats debrief strip above the deck.
  * Base DOM is a static vertical stack; the pin + horizontal tween is layered on
  * only for md+ pointers with motion allowed (gsap.matchMedia), so reduced-motion
- * and mobile get every slide stacked and fully readable.
+ * and <768px viewports get every slide stacked and fully readable.
  */
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
@@ -21,11 +21,13 @@ const yearsBuilding = () => {
   return `${Math.floor(months / 12)}+`;
 };
 
+// Debrief strip: positions + years per Wei's ask; the two scale figures are
+// resume facts that no slide watermark or Credentials-strip cell repeats.
 const stats = [
   { value: String(experiences.length).padStart(2, "0"), label: "positions" },
   { value: yearsBuilding(), label: "years building" },
-  { value: "AI/ML", label: "agents & automation" },
-  { value: "TW·HK·RMT", label: "taiwan · hong kong · remote" },
+  { value: "300+", label: "meeting transcripts automated" },
+  { value: "200+", label: "ad campaigns optimized" },
 ];
 
 const Work = () => {
@@ -45,7 +47,8 @@ const Work = () => {
         if (n < 2) return;
 
         gsap.set(track, { display: "flex", flexDirection: "row", width: `${n * 100}%` });
-        gsap.set(slides, { width: `${100 / n}%` });
+        // Slide separators belong to the stacked layouts only (mobile + reduced motion).
+        gsap.set(slides, { width: `${100 / n}%`, borderBottom: "none" });
         gsap.set("[data-deck-rail]", { display: "flex" });
 
         gsap.to(track, {
@@ -57,8 +60,11 @@ const Work = () => {
             scrub: 0.6,
             start: "top 96px",
             end: () => `+=${window.innerHeight * (n - 1)}`,
+            // Lenis + scrub double-smooths; without snap the deck parks mid-transition.
+            snap: { snapTo: 1 / (n - 1), duration: { min: 0.2, max: 0.5 }, ease: "power1.inOut", directional: true },
             onUpdate: (self) => {
-              const i = Math.round(self.progress * (n - 1));
+              // flip the counter near arrival, not at the 50% midpoint
+              const i = Math.min(n - 1, Math.floor(self.progress * (n - 1) + 0.25));
               if (posRef.current) posRef.current.textContent = String(i + 1).padStart(2, "0");
               if (barRef.current) barRef.current.style.width = `${self.progress * 100}%`;
             },
@@ -73,16 +79,12 @@ const Work = () => {
     <Section id="work" index="01" kicker="work">
       <div ref={root}>
         <div data-deck-pin>
-          {/* stats debrief strip */}
-          <div data-stats className="grid grid-cols-2 md:grid-cols-4 border-y border-rule" data-reveal>
+          {/* stats debrief strip — same strip grammar as Credentials */}
+          <div data-stats className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-ink-3 border border-ink-3" data-reveal>
             {stats.map((s) => (
-              <div key={s.label} className="px-5 py-5 md:px-6 border-r border-rule last:border-r-0 max-md:even:border-r-0 max-md:nth-[n+3]:border-t max-md:nth-[n+3]:border-t-rule">
-                <span className="block font-display font-semibold text-2xl md:text-3xl tracking-tight text-paper">
-                  {s.value}
-                </span>
-                <span className="mt-1 block font-mono text-[0.62rem] uppercase tracking-[0.15em] text-paper-faint">
-                  {s.label}
-                </span>
+              <div key={s.label} className="bg-ink p-6 md:p-8">
+                <p className="font-display font-semibold text-4xl md:text-5xl text-paper">{s.value}</p>
+                <p className="mt-2 font-mono text-[0.65rem] uppercase tracking-[0.15em] text-paper-dim">{s.label}</p>
               </div>
             ))}
           </div>
@@ -91,20 +93,24 @@ const Work = () => {
           <div className="overflow-hidden">
             <div data-deck>
               {experiences.map((exp, i) => (
-                <article key={exp.company} data-deck-slide className="relative py-12 md:py-16 md:px-2 md:min-h-[26rem] flex flex-col md:justify-center gap-6 border-b border-rule md:border-b-0">
+                <article
+                  key={exp.company}
+                  data-deck-slide
+                  className="relative isolate py-12 md:py-16 md:px-2 md:min-h-[26rem] flex flex-col md:justify-center gap-6 border-b border-rule"
+                >
                   <span
-                    className="hidden md:block absolute right-4 top-1/2 -translate-y-1/2 font-display font-semibold text-[12rem] leading-none text-ink-3 select-none pointer-events-none"
+                    className="hidden md:block absolute -z-10 right-4 top-1/2 -translate-y-1/2 font-display font-semibold text-[8rem] lg:text-[11rem] leading-none whitespace-nowrap text-ink-3 select-none pointer-events-none"
                     aria-hidden
                   >
-                    {String(i + 1).padStart(2, "0")}
+                    {exp.figure}
                   </span>
                   <div>
                     <div className="flex items-baseline gap-4">
-                      <span className="font-mono text-paper-faint text-sm" aria-hidden>
+                      <span className="md:hidden font-mono text-paper-faint text-sm" aria-hidden>
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <h3 className="font-display font-semibold text-5xl md:text-7xl tracking-tight text-paper leading-[0.95]">
-                        {exp.company}
+                        {exp.displayName}
                       </h3>
                     </div>
                     <p className="mt-3 text-paper-dim">
@@ -116,6 +122,7 @@ const Work = () => {
                       )}
                     </p>
                     <p className="mt-1 font-mono text-[0.7rem] uppercase tracking-[0.15em] text-paper-faint">
+                      {exp.company !== exp.displayName && `${exp.company} · `}
                       {exp.period} · {exp.location}
                     </p>
                   </div>
@@ -140,7 +147,11 @@ const Work = () => {
           </div>
 
           {/* progress rail — only rendered useful in deck mode; hidden in stacked fallback */}
-          <div data-deck-rail className="hidden items-center gap-4 border-t border-rule py-4 font-mono text-[0.7rem] tracking-[0.15em] text-paper-faint" aria-hidden>
+          <div
+            data-deck-rail
+            className="hidden items-center gap-4 border-t border-rule py-4 font-mono text-[0.7rem] tracking-[0.15em] text-paper-faint"
+            aria-hidden
+          >
             <span>
               <span ref={posRef} className="text-accent">
                 01
@@ -150,7 +161,7 @@ const Work = () => {
             <span className="relative flex-1 h-px bg-rule">
               <span ref={barRef} className="absolute left-0 top-0 h-px bg-accent" style={{ width: "0%" }} />
             </span>
-            <span>scroll</span>
+            <span>scroll →</span>
           </div>
         </div>
       </div>

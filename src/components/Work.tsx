@@ -11,14 +11,21 @@ import { gsap, OK_MOTION } from "@/lib/motion";
 import { experiences } from "@/data/experiences";
 import Section from "./Section";
 
-// Earliest period in experiences (May 2023, Metamory) — keeps "years" honest as time passes.
-const START_YEAR = 2023;
+// Career start = May 2023 (Metamory, earliest period in experiences). Whole
+// elapsed years only, so "N+" never overstates before an anniversary.
+const CAREER_START = new Date(2023, 4);
+
+const yearsBuilding = () => {
+  const now = new Date();
+  const months = (now.getFullYear() - CAREER_START.getFullYear()) * 12 + (now.getMonth() - CAREER_START.getMonth());
+  return `${Math.floor(months / 12)}+`;
+};
 
 const stats = [
   { value: String(experiences.length).padStart(2, "0"), label: "positions" },
-  { value: `${new Date().getFullYear() - START_YEAR}+`, label: "years building" },
+  { value: yearsBuilding(), label: "years building" },
   { value: "AI/ML", label: "agents & automation" },
-  { value: "TW·HK·RMT", label: "taipei · hong kong · remote" },
+  { value: "TW·HK·RMT", label: "taiwan · hong kong · remote" },
 ];
 
 const Work = () => {

@@ -64,7 +64,7 @@ export const experiences: Experience[] = [
     period: "May 2023 – Jan 2024",
     current: false,
     logo: "🌐",
-    headline: "160% surge in web traffic from targeted campaign engineering",
+    headline: "160% surge in web traffic from targeted Google Ads campaigns",
     achievements: [
       "Built and instrumented a React.js marketing site with 13 GTM tags integrated into GA4 for full-funnel analytics"
     ]

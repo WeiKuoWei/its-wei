@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { initSmoothScroll } from "@/lib/motion";
 import { attachReveals } from "@/lib/reveal";
 import Atmosphere from "@/components/Atmosphere";
@@ -10,11 +10,18 @@ import Projects from "@/components/Projects";
 import Credentials from "@/components/Credentials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import Terminal from "@/components/Terminal";
+// Lazy: the console is behind an explicit open (backtick / nav) — keep it out of the initial bundle.
+const Terminal = lazy(() => import("@/components/Terminal"));
 
 const Home = () => {
   const [term, setTerm] = useState(false);
+  // Latched on first open so the lazy chunk mounts once and keeps its history across toggles.
+  const [termLoaded, setTermLoaded] = useState(false);
   const mainRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (term) setTermLoaded(true);
+  }, [term]);
 
   useEffect(() => initSmoothScroll(), []);
   useEffect(() => (mainRef.current ? attachReveals(mainRef.current) : undefined), []);
@@ -44,7 +51,11 @@ const Home = () => {
         <Contact />
       </main>
       <Footer />
-      <Terminal open={term} onClose={() => setTerm(false)} />
+      {termLoaded && (
+        <Suspense fallback={null}>
+          <Terminal open={term} onClose={() => setTerm(false)} />
+        </Suspense>
+      )}
     </>
   );
 };
